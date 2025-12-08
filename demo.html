@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>travelerviewer Demo</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: #f9f9f9;
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .video {
+        background: white;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .comments {
+        margin-top: 10px;
+        padding-left: 20px;
+    }
+    .comment {
+        margin-bottom: 5px;
+    }
+    .footer {
+        margin-top: 40px;
+        text-align: center;
+        color: #666;
+    }
+    .sandbox {
+        padding: 10px;
+        background: #e6f3ff;
+        border-left: 4px solid #007bff;
+        border-radius: 4px;
+        margin-bottom: 20px;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>travelerviewer — TikTok API Sandbox Demo</h1>
+
+<div class="sandbox">
+    This is a <strong>demo version</strong> showing how travelerviewer displays the user’s TikTok videos and comments using the TikTok Developers Sandbox API.
+</div>
+
+<div id="content"></div>
+
+<div class="footer">
+    Demo complete — app reads user's videos & comments (sandbox simulation).
+</div>
+
+<script>
+    const myVideos = [
+        { id: "1", title: "Trip to Paris" },
+        { id: "2", title: "Hiking Adventure" }
+    ];
+
+    const videoComments = {
+        "1": [
+            { user: "alice", text: "Beautiful!" },
+            { user: "bob", text: "Amazing shots!" }
+        ],
+        "2": [
+            { user: "carol", text: "Wow, looks fun!" },
+            { user: "dave", text: "Great view!" }
+        ]
+    };
+
+    const content = document.getElementById("content");
+
+    myVideos.forEach(video => {
+        const div = document.createElement("div");
+        div.className = "video";
+        div.innerHTML = `<h2>${video.title}</h2>`;
+
+        const commentsDiv = document.createElement("div");
+        commentsDiv.className = "comments";
+
+        videoComments[video.id].forEach(c => {
+            const cDiv = document.createElement("div");
+            cDiv.className = "comment";
+            cDiv.textContent = `${c.user}: ${c.text}`;
+            commentsDiv.appendChild(cDiv);
+        });
+
+        div.appendChild(commentsDiv);
+        content.appendChild(div);
+    });
+</script>
+
+</body>
+</html>
