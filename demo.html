@@ -7,22 +7,31 @@
 
 <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f9f9f9; }
-    h1 { text-align: center; margin-bottom: 30px; }
+    h1 { text-align: center; margin-bottom: 20px; }
     .video { background: white; padding: 20px; margin-bottom: 20px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
     .comments { margin-top: 10px; padding-left: 20px; }
     .comment { margin-bottom: 5px; }
     .webhook-event { background: #e6ffe6; padding: 10px; margin-bottom: 10px; border-left: 4px solid #28a745; border-radius: 4px; }
     .footer { margin-top: 40px; text-align: center; color: #666; }
     .sandbox { padding: 10px; background: #e6f3ff; border-left: 4px solid #007bff; border-radius: 4px; margin-bottom: 20px; }
+    .buttons { text-align: center; margin: 20px 0; }
+    .buttons button { margin: 0 10px; padding: 10px 20px; font-size: 16px; cursor: pointer; border-radius: 5px; border: none; color: white; }
+    .login { background-color: #25F4EE; color: #000; }
+    .share { background-color: #ff0050; }
 </style>
 </head>
 
 <body>
 
-<h1>travelerviewer — TikTok API Sandbox + Webhook Demo</h1>
+<h1>travelerviewer — TikTok Demo</h1>
 
 <div class="sandbox">
-    This is a <strong>demo version</strong> showing user videos/comments and real-time TikTok Webhook events.
+    Demo showing videos, comments, Webhook events, and TikTok integration buttons.
+</div>
+
+<div class="buttons">
+    <button class="login" onclick="mockLogin()">Login with TikTok</button>
+    <button class="share" onclick="mockShare()">Share to TikTok</button>
 </div>
 
 <div id="content"></div>
@@ -31,7 +40,7 @@
 <div id="webhook-events"></div>
 
 <div class="footer">
-    Demo complete — shows videos, comments, and Webhook events.
+    Demo complete — shows videos, comments, Webhook events, and TikTok buttons.
 </div>
 
 <script>
@@ -70,7 +79,6 @@
     // Real-time Webhook events via SSE
     const webhookContainer = document.getElementById("webhook-events");
     const evtSource = new EventSource('/events');
-
     evtSource.onmessage = function(e) {
         const data = JSON.parse(e.data);
         const div = document.createElement("div");
@@ -78,6 +86,17 @@
         div.textContent = JSON.stringify(data, null, 2);
         webhookContainer.prepend(div);
     };
+
+    // Mock TikTok Login
+    function mockLogin() {
+        alert("Mock TikTok Login successful!\n(User would normally authenticate via Login Kit)");
+    }
+
+    // Mock TikTok Share
+    function mockShare() {
+        const videoTitle = myVideos[0].title;
+        alert(`Mock Share successful!\n(Video '${videoTitle}' would be shared via Share Kit)`);
+    }
 </script>
 
 </body>
